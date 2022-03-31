@@ -2,6 +2,7 @@
 
 * Directory
 
-| Title                     | URL  |
-|---------------------------+------|
-| Halo Installation (Linux) | [[file:halo-install-linux.org][Link]] |
+| Status | Title                       | URL  |
+|--------+-----------------------------+------|
+| [ ]    | Halo Installation (Windows) | [[file:halo-install-linux.org][Link]] |
+| [X]    | Halo Installation (Linux)   | [[file:halo-install-linux.org][Link]] |
