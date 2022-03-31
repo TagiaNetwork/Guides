@@ -18,7 +18,7 @@ sudo apt-get -y update && sudo apt-get -y upgrade
 ** Ubuntu
 
 #+begin_src shell
-sudo apt-get -y update&& sudo apt-get -y upgrade
+sudo apt-get -y update && sudo apt-get -y upgrade
 #+end_src
 
 ** Fedora
