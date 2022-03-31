@@ -1,0 +1,260 @@
+#+TITLE: Halo Install
+#+OPTIONS: toc:nil creator:nil author:nil c:nil date:nil num:nil timestamp:nil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://gongzhitaao.org/orgcss/org.css"/>
+
+Halo Custom Edition is an expansion for Halo: Combat Evolved's PC/Retail release. Halo CE allows players to create and play custom maps/mods and still has an active player base. This guide will walk you through installing and running Halo CE on your favorite Linux distribution (utilizing WINE, the Windows compatibility layer).
+
+* Update System
+
+Before starting you should make sure your system is running up-to-date software. Begin by launching a terminal and running the commands for your distribution.
+
+** Debian
+
+#+begin_src shell
+sudo dpkg --add-architecture i386 # add x86 architecture
+sudo apt-get -y update && sudo apt-get -y upgrade
+#+end_src
+
+** Ubuntu
+
+#+begin_src shell
+sudo apt-get -y update&& sudo apt-get -y upgrade
+#+end_src
+
+** Fedora
+
+#+begin_src shell
+sudo dnf -y upgrade
+#+end_src
+
+** Arch
+
+#+begin_src shell
+sudo pacman --noconfirm -Syu
+#+end_src
+
+* Install Dependencies
+
+Now you can install the dependencies required to run the game on Linux. We will be using =winetricks= to help install dependencies.
+
+** Distribution Specific
+
+*** Debian
+
+#+begin_src shell
+
+sudo apt-get -y install wine cabextract
+
+cd ~/Downloads
+wget  https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
+chmod +x winetricks
+sudo cp winetricks /usr/local/bin
+#+end_src
+
+*** Ubuntu
+
+#+begin_src shell
+sudo apt-get -y install wine winetricks
+#+end_src
+
+*** Fedora
+
+#+begin_src shell
+sudo dnf -y install wine winetricks p7zip p7zip-plugins
+#+end_src
+
+*** Arch
+
+You will need to enable the =multilib= repository to install wine on Arch. To do this you will need to edit the =/etc/pacman.conf= file. This guide uses the =nano= text editor which may need to be installed.
+
+Run:
+
+#+begin_src shell
+EDITOR=nano sudoedit /etc/pacman.conf
+#+end_src
+
+Within the pacman configuration file navigate to the following lines:
+
+#+begin_example
+#[multilib]
+#Include = /etc/pacman.d/mirrorlist
+#+end_example
+
+Remove the =#= comment symbol at the beginning of the two lines. It should look like this:
+
+#+begin_example
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+#+end_example
+
+Save the file in your editor (=CTRL+x=, press =y=, and then press =enter= in =nano=). You can now run the following command to update your repositories and install wine and winetricks.
+
+#+begin_src shell
+sudo pacman --noconfirm -Sy wine winetricks p7zip
+#+end_src
+
+** Wine Initialization and WineTricks Dependencies
+
+Next you can perform Wine's initialization tasks using wineboot. If prompted to install Mono or Gecko you may click cancel.
+
+#+begin_src shell
+wineboot
+#+end_src
+
+Now use winetricks to install dependencies for running Halo properly. You may be required to click through a couple graphical windows.
+
+#+begin_src shell
+winetricks mfc42 msxml4 d3dx9
+#+end_src
+
+* Download Files
+
+Now you can download the Halo Custom Edition installer and patch (required). You are also *highly* recommended to download the Chimera mod and the Refined map pack for a vastly improved experience. Download mirrors are ordered from most to least recommended. This guide assumes you use the top mirror, if you choose another mirror make sure you adjust file names where they differ in future commands.
+
+** Installer
+
+| Mirror          | Link     |
+|-----------------+----------|
+| OpenCarnage.net | [[https://opencarnage.net/misc/HaloCE%20Installer.zip][Download]] |
+| Vaporeon.io     | [[http://vaporeon.io/hosted/halo/original_files/halocesetup_en_1.00.exe][Download]] |
+| HaloMaps.org    | [[http://hce.halomaps.org/index.cfm?fid=6798][Download]] |
+
+** Patch
+
+| Mirror          | Link     |
+|-----------------+----------|
+| OpenCarnage.net | [[https://opencarnage.net/misc/HaloCE%201.10%20Patch.zip][Download]] |
+| Vaporeon.io     | [[http://vaporeon.io/hosted/halo/original_files/update_installers/haloce-patch-1.0.10.exe][Download]] |
+| HaloMaps.org    | [[http://hce.halomaps.org/index.cfm?fid=6798][Download]] |
+
+** Chimera Mod
+
+Chimera is "the update to Halo: Combat Evolved for the PC that we should have had but never got." It fixes many issues, improves performance, adds features, and more. Performance improvements are very noticeable and for that reason alone its worth installing.
+
+| Mirror          | Link     |
+|-----------------+----------|
+| Vaporeon.io     | [[http://vaporeon.io/hosted/halo/chimera/chimera-latest.7z][Download]] |
+| GitHub.com      | [[https://github.com/SnowyMouse/chimera/releases/latest][Download]] |
+| OpenCarnage.net | [[https://opencarnage.net/index.php?/topic/6916-chimera-download-source-and-discord-updated-2022-03-12/][Download]] |
+
+** Refined Maps
+
+The Halo CE Refined project is a set of patched maps which features fixed shaders, increased HUD resolution, updated fonts, and more. While not strictly neccesary it improves the default experience with no downside.
+
+| Mirror                         | Link     |
+|--------------------------------+----------|
+| Vaporeon.io (All)              | [[http://vaporeon.io/hosted/halo/refined/halo_refined_custom_edition_en_v3rc1.7z][Download]] |
+| Vaporeon.io (Multiplayer Only) | [[http://vaporeon.io/hosted/halo/refined/halo_refined_custom_edition_en_mp_only_v3rc1.7z][Download]] |
+
+* Install and Patch Game
+
+In your terminal navigate to where you downloaded your installer and patch (=cd ~/Downloads=).
+
+** Game Installation
+
+Run these commands to begin the installation process:
+
+#+begin_src shell
+unzip "HaloCE Installer.zip"
+
+wine "HaloCE Installer/halocesetup_en_1.00.exe"
+#+end_src
+
+Click "Accept" to agree to the license agreement. Navigate through the installer, entering your CD key when prompted. After entering your CD key deselect the "Create Desktop Icon", "Install for All Users", and "Install GameSpy Arcade" boxes and click "Install". Do *not* play the game once installed. Close the installer and proceed to the next step.
+
+** Game Patch
+
+Run these commands to patch your game:
+
+#+begin_src shell
+unzip "HaloCE 1.10 Patch.zip"
+
+wine "HaloCE 1.10 Patch/haloce-patch-1.0.10.exe"
+#+end_src
+
+Your game should now be installed and patched. If you would like to install Chimera and/or Refined continue to those steps, if not you can skip to the [[Launching Halo]] section.
+
+* Install Chimera
+
+In your terminal navigate to where you downloaded Chimera (=cd ~/Downloads=).
+
+#+begin_src shell
+7z x "chimera-latest.7z" -ochimera
+
+cd chimera
+#+end_src
+
+Before installing, you will need to make a change to the =chimera.ini= configuration file. Open it in your editor and navigate to the =[font_override]= section and change the =enabled\=1= to be =enabled\=0= to disable the font override.
+
+#+begin_example
+; Enable overriding Chimera's fonts
+enabled=0
+#+end_example
+
+You may also customize other settings as you wish. When you are satisfied, run the following commands to install Chimera.
+
+#+begin_src shell
+# install chimera
+cp -f chimera.ini strings.dll ~/.wine/drive_c/Program\ Files\ \(x86\)/Microsoft\ Games/Halo\ Custom\ Edition/
+
+# install fonts in wine
+cp -f fonts/*.ttf ~/.wine/drive_c/windows/Fonts/
+#+end_src
+
+* Install Refined
+
+In your terminal navigate to where you downloaded Refined (=cd ~/Downloads=).
+
+#+begin_src shell
+7z x halo_refined*.7z -orefined
+
+cd refined
+#+end_src
+
+#+begin_src shell
+cp -f *.map ~/.wine/drive_c/Program\ Files\ \(x86\)/Microsoft\ Games/Halo\ Custom\ Edition/maps/
+#+end_src
+
+* Launching Halo
+
+Halo Custom Edition should now be installed on your machine (along with any addons you may have opted to install). If you are running a standard desktop environment such as =Gnome= or =KDE= you should find an entry for Halo Custom Edition in your application launcher. If you don't find one, or are using alternate desktop environment/window manager, you can follow the steps below to create a launcher script.
+
+Create a new file using your editor, name =halo-launcher= or similar. Input the following script:
+
+#+begin_src shell
+#!/usr/bin/env bash
+
+export WINEDEBUG=-all
+
+cd "$HOME/.wine/drive_c/Program Files (x86)/Microsoft Games/Halo Custom Edition"
+nohup wine haloce.exe &
+#+end_src
+
+Save the file and run =chmod +x halo-launcher= to make it executable. Finally, run =sudo mv halo-launcher /usr/local/bin= which will allow you to launch the application from anywhere. Run =halo-launcher= from your application launcher or the terminal and the game should run.
+
+* Conclusion
+
+Congratulations, you should now have Halo Custom Edition installed and running on your favorite Linux distribution. Have fun playing one of the best video games of all time. Please join the community at [[https://www.opencarnage.net/][Open Carnage]] (if you are experiencing issues we'd love to help you out). You can also find some discord channels, websites, and further resources below.
+
+** Discord Servers
+
+| Name                    | Link                               |
+|-------------------------+------------------------------------|
+| Open Carnage            | https://discord.opencarnage.net/   |
+| Halo Modding Reclaimers | https://discord.reclaimers.net/    |
+| Halo: CE Refined        | https://discord.gg/QzSR2xNGzp      |
+| Chimera                 | https://discord.gg/ZwQeBE2         |
+| Invader                 | https://discord.gg/RCX3nvw         |
+| SPV3                    | https://discord.com/invite/q4f7nTt |
+
+** Resources
+
+| Name                               | Link                        |
+|------------------------------------+-----------------------------|
+| Halo CE3                           | https://haloce3.com         |
+| Halo Maps                          | http://halomaps.org/        |
+| The Reclaimers Library (c20)       | https://c20.reclaimers.net/ |
+
+# Local Variables:
+# org-html-htmlize-output-type: css
+# End:
