@@ -1,11 +1,10 @@
 #+TITLE: Tagia Guides
 #+EXPORT_FILE_NAME: docs/index
-#+OPTIONS: toc:nil creator:nil author:nil c:nil date:nil num:nil timestamp:nil
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://gongzhitaao.org/orgcss/org.css"/>
 
 * Directory
 
 | Title                       | URL  | Video | Status |
 |-----------------------------+------+-------+--------|
-| Halo Installation (Windows) | [[file:halo-install-linux.org][Link]] | N/A   | TODO   |
+| Halo Installation (Windows) | [[file:halo-install-windows.org][Link]] | N/A   | TODO   |
 | Halo Installation (Linux)   | [[file:halo-install-linux.org][Link]] | N/A   | DONE   |

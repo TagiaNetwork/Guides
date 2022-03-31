@@ -1,5 +1,4 @@
 #+TITLE: Halo Custom Edition Installation Guide (Linux)
-#+OPTIONS: toc:nil creator:nil author:nil c:nil date:nil num:nil timestamp:nil
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://gongzhitaao.org/orgcss/org.css"/>
 
 Halo Custom Edition is an expansion for Halo: Combat Evolved's PC/Retail release. Halo CE allows players to create and play custom maps/mods and still has an active player base. This guide will walk you through installing and running Halo CE on your favorite Linux distribution (utilizing WINE, the Windows compatibility layer).
