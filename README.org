@@ -1,4 +1,7 @@
 #+TITLE: Tagia Guides
+#+EXPORT_FILE_NAME: docs/index
+#+OPTIONS: toc:nil creator:nil author:nil c:nil date:nil num:nil timestamp:nil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://gongzhitaao.org/orgcss/org.css"/>
 
 * Directory
 

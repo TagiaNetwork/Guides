@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Halo Custom Edition Installation Guide (Linux)</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+</style>
+<link rel="stylesheet" type="text/css" href="https://gongzhitaao.org/orgcss/org.css"/>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Halo Custom Edition Installation Guide (Linux)</h1>
+<p>
+Halo Custom Edition is an expansion for Halo: Combat Evolved&rsquo;s PC/Retail release. Halo CE allows players to create and play custom maps/mods and still has an active player base. This guide will walk you through installing and running Halo CE on your favorite Linux distribution (utilizing WINE, the Windows compatibility layer).
+</p>
+
+<div id="outline-container-org8eb0f87" class="outline-2">
+<h2 id="org8eb0f87">Update System</h2>
+<div class="outline-text-2" id="text-org8eb0f87">
+<p>
+Before starting you should make sure your system is running up-to-date software. Begin by launching a terminal and running the commands for your distribution.
+</p>
+</div>
+
+<div id="outline-container-org6f66e0e" class="outline-3">
+<h3 id="org6f66e0e">Debian</h3>
+<div class="outline-text-3" id="text-org6f66e0e">
+<div class="org-src-container">
+<pre class="src src-shell"><span class="org-type">sudo</span> dpkg --add-architecture i386 <span class="org-comment-delimiter"># </span><span class="org-comment">add x86 architecture</span>
+<span class="org-type">sudo</span> apt-get -y update &amp;&amp; <span class="org-type">sudo</span> apt-get -y upgrade
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6756ae6" class="outline-3">
+<h3 id="org6756ae6">Ubuntu</h3>
+<div class="outline-text-3" id="text-org6756ae6">
+<div class="org-src-container">
+<pre class="src src-shell"><span class="org-type">sudo</span> apt-get -y update &amp;&amp; <span class="org-type">sudo</span> apt-get -y upgrade
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org57a87d4" class="outline-3">
+<h3 id="org57a87d4">Fedora</h3>
+<div class="outline-text-3" id="text-org57a87d4">
+<div class="org-src-container">
+<pre class="src src-shell"><span class="org-type">sudo</span> dnf -y upgrade
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org356f09f" class="outline-3">
+<h3 id="org356f09f">Arch</h3>
+<div class="outline-text-3" id="text-org356f09f">
+<div class="org-src-container">
+<pre class="src src-shell"><span class="org-type">sudo</span> pacman --noconfirm -Syu
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1b68361" class="outline-2">
+<h2 id="org1b68361">Install Dependencies</h2>
+<div class="outline-text-2" id="text-org1b68361">
+<p>
+Now you can install the dependencies required to run the game on Linux. We will be using <code>winetricks</code> to help install dependencies.
+</p>
+</div>
+
+<div id="outline-container-org32c8efc" class="outline-3">
+<h3 id="org32c8efc">Distribution Specific</h3>
+<div class="outline-text-3" id="text-org32c8efc">
+</div>
+<div id="outline-container-orga4451f9" class="outline-4">
+<h4 id="orga4451f9">Debian</h4>
+<div class="outline-text-4" id="text-orga4451f9">
+<div class="org-src-container">
+<pre class="src src-shell">
+<span class="org-type">sudo</span> apt-get -y install wine cabextract
+
+<span class="org-type">cd</span> ~/Downloads
+wget  https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
+<span class="org-type">chmod</span> +x winetricks
+<span class="org-type">sudo</span> <span class="org-type">cp</span> winetricks /usr/local/bin
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7d7a1b7" class="outline-4">
+<h4 id="org7d7a1b7">Ubuntu</h4>
+<div class="outline-text-4" id="text-org7d7a1b7">
+<div class="org-src-container">
+<pre class="src src-shell"><span class="org-type">sudo</span> apt-get -y install wine winetricks
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgca67f6c" class="outline-4">
+<h4 id="orgca67f6c">Fedora</h4>
+<div class="outline-text-4" id="text-orgca67f6c">
+<div class="org-src-container">
+<pre class="src src-shell"><span class="org-type">sudo</span> dnf -y install wine winetricks p7zip p7zip-plugins
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1308b7d" class="outline-4">
+<h4 id="org1308b7d">Arch</h4>
+<div class="outline-text-4" id="text-org1308b7d">
+<p>
+You will need to enable the <code>multilib</code> repository to install wine on Arch. To do this you will need to edit the <code>/etc/pacman.conf</code> file. This guide uses the <code>nano</code> text editor which may need to be installed.
+</p>
+
+<p>
+Run:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span class="org-variable-name">EDITOR</span>=nano sudoedit /etc/pacman.conf
+</pre>
+</div>
+
+<p>
+Within the pacman configuration file navigate to the following lines:
+</p>
+
+<pre class="example" id="org0ab25a6">
+#[multilib]
+#Include = /etc/pacman.d/mirrorlist
+</pre>
+
+<p>
+Remove the <code>#</code> comment symbol at the beginning of the two lines. It should look like this:
+</p>
+
+<pre class="example" id="orgc3358be">
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+</pre>
+
+<p>
+Save the file in your editor (<code>CTRL+x</code>, press <code>y</code>, and then press <code>enter</code> in <code>nano</code>). You can now run the following command to update your repositories and install wine and winetricks.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span class="org-type">sudo</span> pacman --noconfirm -Sy wine winetricks p7zip
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf6ee5e0" class="outline-3">
+<h3 id="orgf6ee5e0">Wine Initialization and WineTricks Dependencies</h3>
+<div class="outline-text-3" id="text-orgf6ee5e0">
+<p>
+Next you can perform Wine&rsquo;s initialization tasks using wineboot. If prompted to install Mono or Gecko you may click cancel.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">wineboot
+</pre>
+</div>
+
+<p>
+Now use winetricks to install dependencies for running Halo properly. You may be required to click through a couple graphical windows.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">winetricks mfc42 msxml4 d3dx9
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga350983" class="outline-2">
+<h2 id="orga350983">Download Files</h2>
+<div class="outline-text-2" id="text-orga350983">
+<p>
+Now you can download the Halo Custom Edition installer and patch (required). You are also <b>highly</b> recommended to download the Chimera mod and the Refined map pack for a vastly improved experience. Download mirrors are ordered from most to least recommended. This guide assumes you use the top mirror, if you choose another mirror make sure you adjust file names where they differ in future commands.
+</p>
+</div>
+
+<div id="outline-container-org0291119" class="outline-3">
+<h3 id="org0291119">Installer</h3>
+<div class="outline-text-3" id="text-org0291119">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Mirror</th>
+<th scope="col" class="org-left">Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">OpenCarnage.net</td>
+<td class="org-left"><a href="https://opencarnage.net/misc/HaloCE%20Installer.zip">Download</a></td>
+</tr>
+
+<tr>
+<td class="org-left">Vaporeon.io</td>
+<td class="org-left"><a href="http://vaporeon.io/hosted/halo/original_files/halocesetup_en_1.00.exe">Download</a></td>
+</tr>
+
+<tr>
+<td class="org-left">HaloMaps.org</td>
+<td class="org-left"><a href="http://hce.halomaps.org/index.cfm?fid=6798">Download</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org42a0dd1" class="outline-3">
+<h3 id="org42a0dd1">Patch</h3>
+<div class="outline-text-3" id="text-org42a0dd1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Mirror</th>
+<th scope="col" class="org-left">Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">OpenCarnage.net</td>
+<td class="org-left"><a href="https://opencarnage.net/misc/HaloCE%201.10%20Patch.zip">Download</a></td>
+</tr>
+
+<tr>
+<td class="org-left">Vaporeon.io</td>
+<td class="org-left"><a href="http://vaporeon.io/hosted/halo/original_files/update_installers/haloce-patch-1.0.10.exe">Download</a></td>
+</tr>
+
+<tr>
+<td class="org-left">HaloMaps.org</td>
+<td class="org-left"><a href="http://hce.halomaps.org/index.cfm?fid=6798">Download</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgc639036" class="outline-3">
+<h3 id="orgc639036">Chimera Mod</h3>
+<div class="outline-text-3" id="text-orgc639036">
+<p>
+Chimera is &ldquo;the update to Halo: Combat Evolved for the PC that we should have had but never got.&rdquo; It fixes many issues, improves performance, adds features, and more. Performance improvements are very noticeable and for that reason alone its worth installing.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Mirror</th>
+<th scope="col" class="org-left">Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Vaporeon.io</td>
+<td class="org-left"><a href="http://vaporeon.io/hosted/halo/chimera/chimera-latest.7z">Download</a></td>
+</tr>
+
+<tr>
+<td class="org-left">GitHub.com</td>
+<td class="org-left"><a href="https://github.com/SnowyMouse/chimera/releases/latest">Download</a></td>
+</tr>
+
+<tr>
+<td class="org-left">OpenCarnage.net</td>
+<td class="org-left"><a href="https://opencarnage.net/index.php?/topic/6916-chimera-download-source-and-discord-updated-2022-03-12/">Download</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org88b2709" class="outline-3">
+<h3 id="org88b2709">Refined Maps</h3>
+<div class="outline-text-3" id="text-org88b2709">
+<p>
+The Halo CE Refined project is a set of patched maps which features fixed shaders, increased HUD resolution, updated fonts, and more. While not strictly neccesary it improves the default experience with no downside.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Mirror</th>
+<th scope="col" class="org-left">Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Vaporeon.io (All)</td>
+<td class="org-left"><a href="http://vaporeon.io/hosted/halo/refined/halo_refined_custom_edition_en_v3rc1.7z">Download</a></td>
+</tr>
+
+<tr>
+<td class="org-left">Vaporeon.io (Multiplayer Only)</td>
+<td class="org-left"><a href="http://vaporeon.io/hosted/halo/refined/halo_refined_custom_edition_en_mp_only_v3rc1.7z">Download</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6f7a747" class="outline-2">
+<h2 id="org6f7a747">Install and Patch Game</h2>
+<div class="outline-text-2" id="text-org6f7a747">
+<p>
+In your terminal navigate to where you downloaded your installer and patch (<code>cd ~/Downloads</code>).
+</p>
+</div>
+
+<div id="outline-container-orgf0d43ed" class="outline-3">
+<h3 id="orgf0d43ed">Game Installation</h3>
+<div class="outline-text-3" id="text-orgf0d43ed">
+<p>
+Run these commands to begin the installation process:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">unzip <span class="org-string">"HaloCE Installer.zip"</span>
+
+wine <span class="org-string">"HaloCE Installer/halocesetup_en_1.00.exe"</span>
+</pre>
+</div>
+
+<p>
+Click &ldquo;Accept&rdquo; to agree to the license agreement. Navigate through the installer, entering your CD key when prompted. After entering your CD key deselect the &ldquo;Create Desktop Icon&rdquo;, &ldquo;Install for All Users&rdquo;, and &ldquo;Install GameSpy Arcade&rdquo; boxes and click &ldquo;Install&rdquo;. Do <b>not</b> play the game once installed. Close the installer and proceed to the next step.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5d46bc9" class="outline-3">
+<h3 id="org5d46bc9">Game Patch</h3>
+<div class="outline-text-3" id="text-org5d46bc9">
+<p>
+Run these commands to patch your game:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">unzip <span class="org-string">"HaloCE 1.10 Patch.zip"</span>
+
+wine <span class="org-string">"HaloCE 1.10 Patch/haloce-patch-1.0.10.exe"</span>
+</pre>
+</div>
+
+<p>
+Your game should now be installed and patched. If you would like to install Chimera and/or Refined continue to those steps, if not you can skip to the <a href="#orgcd90159">Launching Halo</a> section.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org659790f" class="outline-2">
+<h2 id="org659790f">Install Chimera</h2>
+<div class="outline-text-2" id="text-org659790f">
+<p>
+In your terminal navigate to where you downloaded Chimera (<code>cd ~/Downloads</code>).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">7z x <span class="org-string">"chimera-latest.7z"</span> -ochimera
+
+<span class="org-type">cd</span> chimera
+</pre>
+</div>
+
+<p>
+Before installing, you will need to make a change to the <code>chimera.ini</code> configuration file. Open it in your editor and navigate to the <code>[font_override]</code> section and change the <code>enabled\=1</code> to be <code>enabled\=0</code> to disable the font override.
+</p>
+
+<pre class="example" id="org6bb7069">
+; Enable overriding Chimera's fonts
+enabled=0
+</pre>
+
+<p>
+You may also customize other settings as you wish. When you are satisfied, run the following commands to install Chimera.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span class="org-comment-delimiter"># </span><span class="org-comment">install chimera</span>
+<span class="org-type">cp</span> -f chimera.ini strings.dll ~/.wine/drive_c/Program<span class="org-string">\ </span>Files<span class="org-string">\ \(</span>x86<span class="org-string">\)</span>/Microsoft<span class="org-string">\ </span>Games/Halo<span class="org-string">\ </span>Custom<span class="org-string">\ </span>Edition/
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">install fonts in wine</span>
+<span class="org-type">cp</span> -f fonts/*.ttf ~/.wine/drive_c/windows/Fonts/
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3fc4741" class="outline-2">
+<h2 id="org3fc4741">Install Refined</h2>
+<div class="outline-text-2" id="text-org3fc4741">
+<p>
+In your terminal navigate to where you downloaded Refined (<code>cd ~/Downloads</code>).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">7z x halo_refined*.7z -orefined
+
+<span class="org-type">cd</span> refined
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span class="org-type">cp</span> -f *.map ~/.wine/drive_c/Program<span class="org-string">\ </span>Files<span class="org-string">\ \(</span>x86<span class="org-string">\)</span>/Microsoft<span class="org-string">\ </span>Games/Halo<span class="org-string">\ </span>Custom<span class="org-string">\ </span>Edition/maps/
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcd90159" class="outline-2">
+<h2 id="orgcd90159">Launching Halo</h2>
+<div class="outline-text-2" id="text-orgcd90159">
+<p>
+Halo Custom Edition should now be installed on your machine (along with any addons you may have opted to install). If you are running a standard desktop environment such as <code>Gnome</code> or <code>KDE</code> you should find an entry for Halo Custom Edition in your application launcher. If you don&rsquo;t find one, or are using alternate desktop environment/window manager, you can follow the steps below to create a launcher script.
+</p>
+
+<p>
+Create a new file using your editor, name <code>halo-launcher</code> or similar. Input the following script:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/</span><span class="org-keyword">env</span><span class="org-comment"> bash</span>
+
+<span class="org-builtin">export</span> <span class="org-variable-name">WINEDEBUG</span>=-all
+
+<span class="org-type">cd</span> <span class="org-string">"</span><span class="org-string"><span class="org-constant">$</span></span><span class="org-string"><span class="org-variable-name">HOME</span></span><span class="org-string">/.wine/drive_c/Program Files (x86)/Microsoft Games/Halo Custom Edition"</span>
+nohup wine haloce.exe &amp;
+</pre>
+</div>
+
+<p>
+Save the file and run <code>chmod +x halo-launcher</code> to make it executable. Finally, run <code>sudo mv halo-launcher /usr/local/bin</code> which will allow you to launch the application from anywhere. Run <code>halo-launcher</code> from your application launcher or the terminal and the game should run.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd93f251" class="outline-2">
+<h2 id="orgd93f251">Conclusion</h2>
+<div class="outline-text-2" id="text-orgd93f251">
+<p>
+Congratulations, you should now have Halo Custom Edition installed and running on your favorite Linux distribution. Have fun playing one of the best video games of all time. Please join the community at <a href="https://www.opencarnage.net/">Open Carnage</a> (if you are experiencing issues we&rsquo;d love to help you out). You can also find some discord channels, websites, and further resources below.
+</p>
+</div>
+
+<div id="outline-container-org03809a1" class="outline-3">
+<h3 id="org03809a1">Discord Servers</h3>
+<div class="outline-text-3" id="text-org03809a1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Name</th>
+<th scope="col" class="org-left">Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Open Carnage</td>
+<td class="org-left"><a href="https://discord.opencarnage.net/">https://discord.opencarnage.net/</a></td>
+</tr>
+
+<tr>
+<td class="org-left">Halo Modding Reclaimers</td>
+<td class="org-left"><a href="https://discord.reclaimers.net/">https://discord.reclaimers.net/</a></td>
+</tr>
+
+<tr>
+<td class="org-left">Halo: CE Refined</td>
+<td class="org-left"><a href="https://discord.gg/QzSR2xNGzp">https://discord.gg/QzSR2xNGzp</a></td>
+</tr>
+
+<tr>
+<td class="org-left">Chimera</td>
+<td class="org-left"><a href="https://discord.gg/ZwQeBE2">https://discord.gg/ZwQeBE2</a></td>
+</tr>
+
+<tr>
+<td class="org-left">Invader</td>
+<td class="org-left"><a href="https://discord.gg/RCX3nvw">https://discord.gg/RCX3nvw</a></td>
+</tr>
+
+<tr>
+<td class="org-left">SPV3</td>
+<td class="org-left"><a href="https://discord.com/invite/q4f7nTt">https://discord.com/invite/q4f7nTt</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgdbcd56f" class="outline-3">
+<h3 id="orgdbcd56f">Resources</h3>
+<div class="outline-text-3" id="text-orgdbcd56f">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Name</th>
+<th scope="col" class="org-left">Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Halo CE3</td>
+<td class="org-left"><a href="https://haloce3.com">https://haloce3.com</a></td>
+</tr>
+
+<tr>
+<td class="org-left">Halo Maps</td>
+<td class="org-left"><a href="http://halomaps.org/">http://halomaps.org/</a></td>
+</tr>
+
+<tr>
+<td class="org-left">The Reclaimers Library (c20)</td>
+<td class="org-left"><a href="https://c20.reclaimers.net/">https://c20.reclaimers.net/</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
